@@ -22,9 +22,9 @@ $data = json_decode($result, true);
         <div class="row">
             <div class="col text-center">
                 <h2>Al-Quran Online</h2>
-                <p>Baca Al-Quran gratis secara Online</p>
+                <p>Baca Al-Quran secara Online <br> 114 Surah</p>
                     <form class="d-flex input-search" role="search">
-                        <input class="form-control me-2 cari" type="search" placeholder="Cari Surat" aria-label="Search">
+                        <input class="form-control me-2 cari" type="search" placeholder="Cari Surah" aria-label="Search">
                         <button class="btn btn-outline-secondary" onclick="buttonUp()" type="button">Search</button>
                     </form>
             </div>
@@ -37,7 +37,7 @@ $data = json_decode($result, true);
                     $en = $asma['en']
                     ?> 
                     <div class="card mb-2">
-                        <a href="<?= $link ?>/<?= $d['number'] ?>" class="text-dark" style="text-decoration: none;">
+                        <a href="surah.php?surat=<?= $d['number'] ?>" class="text-dark" style="text-decoration: none;">
                         <div class="card-body">
                             <span style="float: right; margin-top: auto;"><?= $d['number']; ?></span>
                             <span class="en"><?= $en['short']; ?></span>
@@ -52,6 +52,8 @@ $data = json_decode($result, true);
             </div>
         </div>
     </div>
+
+    <?php include('footer.php') ?>
 
 <script type="text/javascript">
     var buttonUp = () => {

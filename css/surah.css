@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Georgia", "Arial", "Serif";
+    width: 100%;
+    color: #444;
+    position: relative;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: #eee;
+    border: none;
+    padding: 5px 12.8px 12.8px 12.8px;
+}
+
+.arab {
+    font-family: 'Amiri Quran', serif;
+    font-size: 1.7em;
+}
+
+.text-dark {
+    transition: all .2s ease;
+    border-radius: .25rem;
+}
+
+.text-dark:hover {
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 128, 0.3);
+}
+
+.input-search {
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.translate {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 5px;
+}
+
+.num {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 4px;
+    background-color: lightgray;
+    float: left;
+}
+
+@media screen and (max-width:  576px) {
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
