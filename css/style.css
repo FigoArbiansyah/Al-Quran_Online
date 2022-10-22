@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Georgia", "Arial", "Serif";
+    width: 100%;
+    color: #444;
+    position: relative;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: #eee;
+    border: none;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.arab-surah {
+    font-size: 1.2em;
+}
+
+.text-dark {
+    transition: all .2s ease;
+    border-radius: .25rem;
+}
+
+.text-dark:hover {
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 128, 0.3);
+}
+
+.input-search {
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+@media screen and (max-width:  576px) {
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
