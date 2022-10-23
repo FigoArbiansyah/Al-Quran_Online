@@ -1,31 +1,37 @@
 <?php 
 
 $surah = $_GET['surat'];
-if ($surah - 1 == 0) {
-    $prev = 114;
+$ayat = $_GET['ayat'];
+$count = $_GET['jmlAyat'];
+
+if ($ayat - 1 == 0) {
+    $prev = 1;
 } else {
-    $prev = $surah - 1;
+    $prev = $ayat - 1;
 }
 
-if ($surah + 1 == 115) {
-    $next = 1;
+if ($ayat + 1 > $count) {
+    $next = $count;
 } else {
-    $next = $surah + 1;
+    $next = $ayat + 1;
 }
 
-$link = "https://quran-endpoint.vercel.app/quran/$surah";
+$link = "https://quran-endpoint.vercel.app/quran/$surah/$ayat";
 $result = file_get_contents($link);
 $data = json_decode($result, true);
 $d = $data['data'];
-$ayahs = $d["ayahs"];
+$ayahs = $d["ayah"];
 
 // Manggil nama surat sama arti nya
-
-$asma = $d['asma'];
+$num = $ayahs['number'];
+$asma = $d['surah'];
 $id = $asma['id'];
 $ar = $asma['ar'];
 $trans = $asma['translation'];
-$download = $d['recitation'];
+$text = $ayahs['text'];
+$translateAyat = $ayahs['translation'];
+$tafsir = $ayahs['tafsir'];
+$audio = $ayahs['audio'];
 
 ?>
 
@@ -47,30 +53,25 @@ $download = $d['recitation'];
             <div class="col text-center">
                 <p>Surah</p>
                 <h4><?= $id['short'] ?> - <?= $ar['short'] ?></h4>
-                <p>"<?= $trans['id'] ?>" 
+                <p>"<?= $trans['id'] ?>"
+                <h5>Ayat ke <?= $num['insurah'] ?></h5> 
                 <br>
-                (<?= $d['ayahCount'] ?> Ayat)</p>
                 <br>
             </div>
                 <div class="d-flex justify-content-evenly">
-                    <a href="surah.php?surat=<?= $prev ?>" class="fw-bold prev">←</a> 
-                        <a href="index.php" class="home">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                    <a href="ayat.php?surat=<?= $surah ?>&ayat=<?= $prev ?>&jmlAyat=<?= $count ?>" class="fw-bold prev">←</a> 
+                        <a href="surah.php?surat=<?= $surah ?>" class="home">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-arrow-up" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M8 11a.5.5 0 0 0 .5-.5V6.707l1.146 1.147a.5.5 0 0 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L7.5 6.707V10.5a.5.5 0 0 0 .5.5z"/>
+                              <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                              <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                             </svg>
                         </a> 
-                    <a href="surah.php?surat=<?= $next ?>" class="fw-bold next">→</a>
+                    <a href="ayat.php?surat=<?= $surah ?>&ayat=<?= $next ?>&jmlAyat=<?= $count ?>" class="fw-bold next">→</a>
                 </div>
         </div>
         <div class="row mt-3">
             <div class="col">
-                <?php foreach ($ayahs as $ayah) {
-                    $num = $ayah['number'];
-                    $text = $ayah['text'];
-                    $translate = $ayah['translation'];
-                    $tafsir = $ayah['tafsir'];
-                    $audio = $ayah['audio'];
-                    ?>
                     <div class="card mb-2">
                         <span class="num"><?= $num['insurah'] ?></span>
                         <div class="card-body">
@@ -83,19 +84,18 @@ $download = $d['recitation'];
                         </div>
                     </div>
                         <div id="audio" class="justify-content-end d-flex align-items-center">
-                            <audio controls class="audioAyah me-2">
+                            <audio controls class="audioAyah me-1">
                                 <source src="<?= $audio['url'] ?>" type="audio/mp3">
                             </audio>
-                            <a href="ayat.php?surat=<?= $surah ?>&ayat=<?= $num['insurah'] ?>&jmlAyat=<?= $d['ayahCount'] ?>" class="badge rounded-pill btn btn-secondary me-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
-                                  <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-                                </svg>
-                            </a>
                         </div>
                     <div class="bg-white translate">
-                        <span><em><?= $translate['id'] ?></em></span>
+                        <span><em><?= $translateAyat['id'] ?></em></span>
                     </div>
-                <?php } ?>
+
+                    <div class="bg-white tafsir mb-4">
+                        <p>Tafsir:</p>
+                        <span><?= $tafsir['id'] ?></span>
+                    </div>
             </div>
         </div>
     </div>
