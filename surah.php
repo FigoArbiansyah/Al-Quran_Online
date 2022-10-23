@@ -25,6 +25,7 @@ $asma = $d['asma'];
 $id = $asma['id'];
 $ar = $asma['ar'];
 $trans = $asma['translation'];
+$download = $d['recitation'];
 
 ?>
 
@@ -52,13 +53,13 @@ $trans = $asma['translation'];
                 <br>
             </div>
                 <div class="d-flex justify-content-evenly">
-                    <a href="surah.php?surat=<?= $prev ?>" class="fw-bold" style="position: ; top: 80px; left: 60px; font-size: 1.7em; text-decoration: none; color: black;">←</a>
-                    <a href="index.php" style="color: black; transform: scale(1.4);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                        </svg>
-                    </a>
-                    <a href="surah.php?surat=<?= $next ?>" class="fw-bold" style="position: ; top: 80px; right: 60px; font-size: 1.7em; text-decoration: none; color: black;">→</a>
+                    <a href="surah.php?surat=<?= $prev ?>" class="fw-bold prev">←</a> 
+                        <a href="index.php" class="home">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                            </svg>
+                        </a> 
+                    <a href="surah.php?surat=<?= $next ?>" class="fw-bold next">→</a>
                 </div>
         </div>
         <div class="row mt-3">
@@ -67,6 +68,8 @@ $trans = $asma['translation'];
                     $num = $ayah['number'];
                     $text = $ayah['text'];
                     $translate = $ayah['translation'];
+                    $tafsir = $ayah['tafsir'];
+                    $audio = $ayah['audio'];
                     ?>
                     <div class="card mb-2">
                         <span class="num"><?= $num['insurah'] ?></span>
@@ -79,6 +82,16 @@ $trans = $asma['translation'];
                             </div>
                         </div>
                     </div>
+                        <div id="audio" class="justify-content-end d-flex align-items-center">
+                            <audio controls class="audioAyah me-2">
+                                <source src="<?= $audio['url'] ?>" type="audio/mp3">
+                            </audio>
+                            <a href="ayat.php?surat=<?= $surah ?>&ayat=<?= $num['insurah'] ?>" class="badge rounded-pill btn btn-secondary me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+                                  <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                                </svg>
+                            </a>
+                        </div>
                     <div class="bg-white translate">
                         <span><em><?= $translate['id'] ?></em></span>
                     </div>
@@ -89,5 +102,13 @@ $trans = $asma['translation'];
 
 
     <?php include('footer.php') ?>
+
+   <!--  <script type="text/javascript">
+        const showTafsir = () => {
+            const tafsir = document.querySelector(".tafsirnya");
+            tafsir.classList.remove("show-tafsir")
+            tafsir.classList.add("hide-tafsir")
+        }
+    </script> -->
 </body>
 </html>

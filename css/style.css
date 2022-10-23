@@ -17,6 +17,11 @@ body {
     border: none;
     margin-left: 5rem;
     margin-right: 5rem;
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
 }
 
 .arab-surah {
@@ -36,6 +41,13 @@ body {
     margin-left: 5rem;
     margin-right: 5rem;
 }
+
+input {
+    border: none;
+    background: transparent;
+    padding-left: 10px;
+}
+
 
 @media screen and (max-width:  576px) {
     body {

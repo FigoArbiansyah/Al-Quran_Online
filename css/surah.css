@@ -50,8 +50,44 @@ body {
     top: 0px;
     left: 0px;
     padding: 4px;
+    padding-right: 9px;
+    padding-bottom: 9px;
+    border-bottom-right-radius: .40rem;
     background-color: lightgray;
     float: left;
+}
+
+.prev {
+    position: ; top: 80px; left: 60px; font-size: 1.7em; text-decoration: none;
+     color: black; transition: all 0.2s ease-in-out;
+}
+
+.next {
+    position: ; top: 80px; right: 60px; font-size: 1.7em; text-decoration: none;
+     color: black; transition: all 0.2s ease-in-out;
+}
+
+.home {
+    color: black; transform: scale(1.4); transition: all 0.2s ease;
+}
+
+ .home:hover {
+    transform: scale(1.7);
+    color: black;
+ }
+
+.prev:hover, .next:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+    color: black;
+}
+
+.show-tafsir {
+    display: none;
+}
+
+.hide-tafsir {
+    display: inline;
 }
 
 @media screen and (max-width:  576px) {
